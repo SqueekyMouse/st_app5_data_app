@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
-# commit: add widgets, load csv, plot Sec32
+# commit: updated comments on df Sec32
 
 df=pd.read_csv('happy.csv')
 
@@ -14,6 +14,8 @@ yaxis=st.selectbox(label='Select the data for y-axis',
 st.subheader(f'{xaxis} and {yaxis}')
 
 def get_data(x:str,y:str):
+    # just need to be an array ie, list or iterable!!!
+    # so doesnt need explicit list conversion!!!
     ax=list(df[x])
     ay=list(df[y])
     return(ax,ay)

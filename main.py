@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
-# commit: better opt record handling Sec32
+# commit: vars renamed, comment updated Sec32
 
 df=pd.read_csv('happy.csv')
 
@@ -16,15 +16,15 @@ st.subheader(f'{xopt} and {yopt}')
 def get_data(opt:str):
     match opt:
         case 'GDP':
-            res_list=df['gdp']
+            res_list=df['gdp'] # just need to be an array ie, list or iterable!!!
         case 'Happiness':
             res_list=df['happiness']
         case 'Generosity':
             res_list=df['generosity']
     return(res_list)
 
-x=get_data(xopt)
-y=get_data(yopt)
+xarray=get_data(xopt) # just need to be an array ie, list or iterable!!!
+yarray=get_data(yopt)
 
-figure=px.scatter(x=x,y=y,labels={'x':xopt,'y':yopt})
+figure=px.scatter(x=xarray,y=yarray,labels={'x':xopt,'y':yopt})
 st.plotly_chart(figure)
