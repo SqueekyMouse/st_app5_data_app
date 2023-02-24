@@ -1,23 +1,30 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
-# commit: add widgets, load csv, plot Sec32
+# commit: better opt record handling Sec32
 
 df=pd.read_csv('happy.csv')
 
 st.title('In Search for Happiness')
-xaxis=st.selectbox(label='Select the data for x-axis',options=['GDP','Happiness','Generosity'])
-yaxis=st.selectbox(label='Select the data for y-axis',options=['GDP','Happiness','Generosity'])
+xopt=st.selectbox(label='Select the data for x-axis',
+                   options=['GDP','Happiness','Generosity'])
+yopt=st.selectbox(label='Select the data for y-axis',
+                   options=['GDP','Happiness','Generosity'])
 
-st.subheader(f'{xaxis} and {yaxis}')
+st.subheader(f'{xopt} and {yopt}')
 
-def get_data(x:str,y:str):
-    ax=list(df[x])
-    ay=list(df[y])
-    return(ax,ay)
+def get_data(opt:str):
+    match opt:
+        case 'GDP':
+            res_list=df['gdp']
+        case 'Happiness':
+            res_list=df['happiness']
+        case 'Generosity':
+            res_list=df['generosity']
+    return(res_list)
 
-x,y=get_data(xaxis.lower(),yaxis.lower())
+x=get_data(xopt)
+y=get_data(yopt)
 
-# figure=px.line(x=x,y=y,labels={'x':xaxis,'y':yaxis})
-figure=px.scatter(x=x,y=y,labels={'x':xaxis,'y':yaxis})
+figure=px.scatter(x=x,y=y,labels={'x':xopt,'y':yopt})
 st.plotly_chart(figure)
