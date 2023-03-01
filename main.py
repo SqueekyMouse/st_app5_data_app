@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.express as px
 import pandas as pd
-# commit: vars renamed, comment updated Sec32
+# commit: fn metadata updated Sec32
 
 df=pd.read_csv('happy.csv')
 
@@ -13,7 +13,7 @@ yopt=st.selectbox(label='Select the data for y-axis',
 
 st.subheader(f'{xopt} and {yopt}')
 
-def get_data(opt:str):
+def get_data(opt:str)->list:
     match opt:
         case 'GDP':
             res_list=df['gdp'] # just need to be an array ie, list or iterable!!!
